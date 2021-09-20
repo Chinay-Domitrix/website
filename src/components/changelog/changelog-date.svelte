@@ -7,8 +7,8 @@
 
 <div class="w-full md:w-4/12">
   <ChangelogLink {href}>
-    <p class="mb-xx-small h3 text-black">
+    <span class="mb-xx-small h3 text-black">
       {date}
-    </p>
+    </span>
   </ChangelogLink>
 </div>
