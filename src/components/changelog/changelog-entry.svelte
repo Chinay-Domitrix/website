@@ -4,9 +4,9 @@
   import { page } from "$app/stores";
   import type { ChangelogEntry } from "../../types/changelog-entry.type";
   import { stringToBeautifiedFragment } from "../../utils/helpers";
-import BackLink from "./back-link.svelte";
+  import BackLink from "./back-link.svelte";
   import ChangelogDate from "./changelog-date.svelte";
-import ChangelogLink from "./changelog-link.svelte";
+  import ChangelogLink from "./changelog-link.svelte";
 
   export let entry: ChangelogEntry;
   export let isAnEntryAlone = $page.path.split("/").length === 3;
@@ -19,7 +19,7 @@ import ChangelogLink from "./changelog-link.svelte";
       day: "numeric",
     }
   );
-  const href = `/changelog/${stringToBeautifiedFragment(title)}`
+  const href = `/changelog/${stringToBeautifiedFragment(title)}`;
 </script>
 
 <style type="text/postcss">
@@ -53,11 +53,7 @@ import ChangelogLink from "./changelog-link.svelte";
     {#if isAnEntryAlone}
       <BackLink />
     {/if}
-    <img
-      src="/images/changelog/{image}"
-      class="rounded-3xl"
-      alt={alt + "Test"}
-    />
+    <img src="/images/changelog/{image}" class="rounded-3xl" {alt} />
     {#if isAnEntryAlone}
       <p class="mt-xx-small -mb-9">{formattedDate}</p>
     {/if}
@@ -65,9 +61,7 @@ import ChangelogLink from "./changelog-link.svelte";
       {#if isAnEntryAlone}
         {title}
       {:else}
-        <ChangelogLink
-          {href}
-        >
+        <ChangelogLink {href}>
           {title}
         </ChangelogLink>
       {/if}

@@ -8,11 +8,7 @@
 <div class="w-full md:w-4/12">
   <ChangelogLink {href}>
     <p class="mb-xx-small h3 text-black">
-      {new Date(Date.parse(date)).toLocaleDateString(undefined, {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })}
+      {date}
     </p>
   </ChangelogLink>
 </div>
