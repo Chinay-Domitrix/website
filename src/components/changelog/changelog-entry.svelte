@@ -4,6 +4,7 @@
   import { page } from "$app/stores";
   import type { ChangelogEntry } from "../../types/changelog-entry.type";
   import { stringToBeautifiedFragment } from "../../utils/helpers";
+import BackLink from "./back-link.svelte";
   import ChangelogDate from "./changelog-date.svelte";
 import ChangelogLink from "./changelog-link.svelte";
 
@@ -49,6 +50,9 @@ import ChangelogLink from "./changelog-link.svelte";
     <ChangelogDate date={formattedDate} {href} />
   {/if}
   <div class="{!isAnEntryAlone ? 'w-full md:w-8/12' : ''} content-docs">
+    {#if isAnEntryAlone}
+      <BackLink />
+    {/if}
     <img
       src="/images/changelog/{image}"
       class="rounded-3xl"
