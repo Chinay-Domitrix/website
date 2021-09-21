@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
-  import ChangelogEntry from "../../components/changelog/changelog-entry.svelte";
-  import { stringToBeautifiedFragment } from "../../utils/helpers";
+  import { formatDate, stringToBeautifiedFragment } from "../../utils/helpers";
   import type { ChangelogEntry as ChangelogEntryType } from "../../types/changelog-entry.type";
+  import BackLink from "../../components/changelog/back-link.svelte";
 
   export async function load({ page, session }) {
     const changelogEntry: ChangelogEntryType = session.changelogEntries.find(
@@ -13,7 +13,32 @@
 </script>
 
 <script lang="ts">
+  import Wrapper from "../../components/changelog/wrapper.svelte";
   export let changelogEntry: ChangelogEntryType;
+  const { date, title, content, image, alt } = changelogEntry;
 </script>
 
-<ChangelogEntry entry={changelogEntry} class="py-20" />
+<style type="text/postcss">
+  .entry {
+    max-width: 800px;
+    @apply mx-auto;
+  }
+
+  .entry h2 {
+    @apply text-h3 !important;
+  }
+</style>
+
+<Wrapper class="py-20">
+  <div class=" entry flex flex-col md:flex-row">
+    <div class="content-changelog">
+      <BackLink />
+      <img src="/images/changelog/{image}" class="rounded-3xl" {alt} />
+      <p class="mt-xx-small -mb-9">{formatDate(date)}</p>
+      <h2>
+        {title}
+      </h2>
+      {@html content}
+    </div>
+  </div>
+</Wrapper>

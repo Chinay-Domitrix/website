@@ -13,7 +13,10 @@
   import "../../assets/markdown-commons.scss";
   import Modal from "../../components/modal.svelte";
   import TwitterFollowButton from "../../components/twitter-follow-button.svelte";
-  import ChangelogEntry from "../../components/changelog/changelog-entry.svelte";
+  import { formatDate, stringToBeautifiedFragment } from "../../utils/helpers";
+  import ChangelogDate from "../../components/changelog/changelog-date.svelte";
+  import ChangelogLink from "../../components/changelog/changelog-link.svelte";
+  import Wrapper from "../../components/changelog/wrapper.svelte";
 
   export let changelogEntries: ChangelogEntryType[];
 
@@ -50,8 +53,24 @@
 </div>
 
 <div class="flex flex-col space-y-x-large md:space-y-xx-large">
-  {#each changelogEntries as entry}
-    <ChangelogEntry {entry} />
+  {#each changelogEntries as { date, title, content, image, alt }}
+    <div class="flex flex-col md:flex-row">
+      <ChangelogDate
+        date={formatDate(date)}
+        href={`/changelog/${stringToBeautifiedFragment(title)}`}
+      />
+      <Wrapper class="content-changelog w-full md:w-8/12">
+        <img src="/images/changelog/{image}" class="rounded-3xl" {alt} />
+        <h2>
+          <ChangelogLink
+            href={`/changelog/${stringToBeautifiedFragment(title)}`}
+          >
+            {title}
+          </ChangelogLink>
+        </h2>
+        {@html content}
+      </Wrapper>
+    </div>
     <div class="border-b border-gray-300" />
   {/each}
 </div>

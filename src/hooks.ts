@@ -12,12 +12,10 @@ export const getContext: import("@sveltejs/kit").GetContext = async () => {
 
   const changelogEntries = await Promise.all(
     Object.entries(import.meta.glob("/src/contents/changelog/*.md")).map(
-      async ([path, page]) => {
-        const { default: content, metadata } = await page();
-        const filename = path.split("/").pop();
+      async ([, mod]) => {
+        const { default: content, metadata } = await mod();
         return {
           ...metadata,
-          filename,
           content: content.render().html,
         };
       }
