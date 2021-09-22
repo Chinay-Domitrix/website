@@ -14,8 +14,9 @@
 
 <script lang="ts">
   import Wrapper from "../../components/changelog/wrapper.svelte";
+  import OpenGraph from "../../components/open-graph.svelte";
   export let changelogEntry: ChangelogEntryType;
-  const { date, title, content, image, alt } = changelogEntry;
+  const { date, title, excerpt, content, image, alt } = changelogEntry;
 </script>
 
 <style type="text/postcss">
@@ -28,6 +29,16 @@
     @apply text-h3 !important;
   }
 </style>
+
+<OpenGraph
+  data={{
+    description: excerpt,
+    title,
+    type: "article",
+    image: `images/changelog/${image}`,
+    imageTwitter: `images/changelog/${image}`,
+  }}
+/>
 
 <Wrapper class="py-20">
   <div class=" entry flex flex-col md:flex-row">
